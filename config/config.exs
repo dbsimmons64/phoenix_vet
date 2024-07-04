@@ -31,6 +31,9 @@ config :phoenix_vet, PhoenixVetWeb.Endpoint,
 # at the `config/runtime.exs`.
 config :phoenix_vet, PhoenixVet.Mailer, adapter: Swoosh.Adapters.Local
 
+config :phoenix_vet,
+  ash_domains: [PhoenixVet.Practise]
+
 # Configure esbuild (the version is required)
 config :esbuild,
   version: "0.17.11",
