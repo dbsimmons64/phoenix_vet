@@ -1,0 +1,8 @@
+<.header>
+  Listing Owners
+</.header>
+
+<.table id="owners" rows={@streams.owners}>
+  <:col :let={{_id, owner}} label="Name"><%= owner.name %></:col>
+  <:col :let={{_id, owner}} label="Email"><%= owner.email %></:col>
+</.table>

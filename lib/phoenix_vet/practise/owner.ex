@@ -21,7 +21,10 @@ defmodule PhoenixVet.Practise.Owner do
 
   actions do
     create :create do
-      accept [:email, :name, :phone]
+      accept [:email, :name]
+      argument :pets, {:array, :map}
+
+      change manage_relationship(:pets, type: :create)
     end
 
     # Need a default read, without arguments, to support the update. Primary read actions should not have
@@ -38,9 +41,15 @@ defmodule PhoenixVet.Practise.Owner do
 
     update :update do
       accept [:email, :name, :phone]
+
+      argument :pets, {:array, :map}
+
+      change manage_relationship(:pets, type: :direct_control)
+
+      require_atomic? false
     end
 
-    destroy :destroyx do
+    destroy :destroy do
       primary? true
     end
   end

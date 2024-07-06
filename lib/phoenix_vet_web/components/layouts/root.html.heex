@@ -1,17 +1,61 @@
 <!DOCTYPE html>
-<html lang="en" class="[scrollbar-gutter:stable]">
+<html lang="en" style="scrollbar-gutter: stable;">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="csrf-token" content={get_csrf_token()} />
     <.live_title suffix=" · Phoenix Framework">
-      <%= assigns[:page_title] || "PhoenixVet" %>
+      <%= assigns[:page_title] || "Vets" %>
     </.live_title>
     <link phx-track-static rel="stylesheet" href={~p"/assets/app.css"} />
     <script defer phx-track-static type="text/javascript" src={~p"/assets/app.js"}>
     </script>
   </head>
-  <body class="bg-white">
+  <body class="bg-white antialiased">
+    <div class="navbar bg-base-100">
+      <div class="flex-1">
+        <img class="mask mask-circle h-24" src={~p"/images/logo.svg"} />
+      </div>
+      <div class="flex-none">
+        <ul class="menu menu-horizontal px-1">
+          <%= if @current_user do %>
+            <li><a href={~p"/overview"}>Overview</a></li>
+            <li><a href={~p"/accounts"}>Accounts</a></li>
+            <li><a href={~p"/categories"}>Categories</a></li>
+            <li>
+              <details>
+                <summary>
+                  <%= @current_user.email %>
+                </summary>
+                <ul class="p-2 bg-base-100 rounded-t-none w-full">
+                  <li><a href={~p"/users/settings"}>Settings</a></li>
+                  <li>
+                    <.link href={~p"/users/log_out"} method="delete">
+                      Log out
+                    </.link>
+                  </li>
+                </ul>
+              </details>
+            </li>
+          <% else %>
+            <li>
+              <a href={~p"/users/register"}>
+                Register
+              </a>
+            </li>
+            <li>
+              <a
+                href={~p"/users/log_in"}
+                class="text-[0.8125rem] leading-6 text-zinc-900 font-semibold hover:text-zinc-700"
+              >
+                Log in
+              </a>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+
     <%= @inner_content %>
   </body>
 </html>

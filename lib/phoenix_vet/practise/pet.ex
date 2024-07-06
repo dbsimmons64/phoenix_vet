@@ -24,15 +24,27 @@ defmodule PhoenixVet.Practise.Pet do
 
   actions do
     create :create do
-      accept [:name, :date_of_birth, :type, :owner_id]
+      accept [:name]
+      primary? true
     end
 
     read :read do
       primary? true
     end
 
+    update :update do
+      accept [:name]
+      validate string_length(:name, min: 3)
+      primary? true
+      require_atomic? false
+    end
+
     update :assign do
       accept [:owner_id]
+    end
+
+    destroy :destroy do
+      primary? true
     end
   end
 
