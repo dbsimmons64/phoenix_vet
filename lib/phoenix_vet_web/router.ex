@@ -21,7 +21,9 @@ defmodule PhoenixVetWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :home
-    live "/owners", OwnerLive.Index, :index
+    live "/owners", OwnerLive, :index
+    live "/owners/new", OwnerLive, :new
+    live "/owners/:id/edit", OwnerLive, :edit
   end
 
   # Other scopes may use custom stacks.

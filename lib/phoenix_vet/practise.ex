@@ -7,6 +7,7 @@ defmodule PhoenixVet.Practise do
       define :get_owners, action: :read
       define :get_owner_by_id, action: :read_by_id, args: [:id]
       define :update_owner, action: :update
+      define :delete_owner, action: :destroy
     end
 
     resource PhoenixVet.Practise.Pet do

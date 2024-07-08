@@ -1,0 +1,53 @@
+<.header>
+  Listing Owners
+  <:actions>
+    <.link patch={~p"/owners/new"}>
+      <.button>New Owner</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.table id="owners" rows={@streams.owners}>
+  <:col :let={{_id, owner}} label="Name"><%= owner.name %></:col>
+  <:col :let={{_id, owner}} label="Email"><%= owner.email %></:col>
+  <:action :let={{_id, owner}}>
+    <.link patch={~p"/owners/#{owner}/edit"}>Edit</.link>
+  </:action>
+  <:action :let={{id, owner}}>
+    <.link
+      phx-click={JS.push("delete", value: %{id: owner.id}) |> hide("##{id}")}
+      data-confirm="Are you sure?"
+    >
+      Delete
+    </.link>
+  </:action>
+</.table>
+
+<.modal
+  :if={@live_action in [:new, :edit]}
+  id="owner-modal"
+  show
+  on_cancel={JS.patch(~p"/owners")}
+>
+  <h2 class="mt-8 text-lg"><%= @live_action %> owner</h2>
+  <.form :let={f} for={@form} phx-submit={@submit_action}>
+    <.input type="text" field={f[:name]} placeholder="input title" />
+
+    <.input type="text" field={f[:email]} placeholder="email" />
+
+    <.inputs_for :let={pet_form} field={f[:pets]}>
+      <%= pet_form.index %>
+      <%= pet_form.name %>
+      <.input type="text" field={pet_form[:name]} placeholder="input title" />
+      <.link phx-click={JS.push("delete_pet")} phx-value-path={pet_form.name}>
+        Delete
+      </.link>
+    </.inputs_for>
+
+    <.button class="mt-2" type="submit"><%= @submit_action %></.button>
+  </.form>
+
+  <.link phx-click={JS.push("add_pet")}>
+    Add Pet
+  </.link>
+</.modal>

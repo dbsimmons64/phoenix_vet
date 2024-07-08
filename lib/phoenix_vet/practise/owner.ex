@@ -12,7 +12,11 @@ defmodule PhoenixVet.Practise.Owner do
     integer_primary_key :id
 
     attribute :email, :string
-    attribute :name, :string
+
+    attribute :name, :string do
+      allow_nil? false
+    end
+
     attribute :phone, :string
 
     create_timestamp :inserted_at

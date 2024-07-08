@@ -35,7 +35,8 @@ defmodule PhoenixVet.Repo.Migrations.InitialMigrations do
                column: :id,
                name: "pets_owner_id_fkey",
                type: :bigint,
-               prefix: "public"
+               prefix: "public",
+               on_delete: :delete_all
              )
     end
 

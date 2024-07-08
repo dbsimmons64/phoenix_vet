@@ -6,6 +6,10 @@ defmodule PhoenixVet.Practise.Pet do
   postgres do
     table "pets"
     repo PhoenixVet.Repo
+
+    references do
+      reference :owner, on_delete: :delete, name: "pets_owner_id_fkey"
+    end
   end
 
   attributes do
