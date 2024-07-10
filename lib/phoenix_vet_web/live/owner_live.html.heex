@@ -30,24 +30,34 @@
   on_cancel={JS.patch(~p"/owners")}
 >
   <h2 class="mt-8 text-lg"><%= @live_action %> owner</h2>
-  <.form :let={f} for={@form} phx-submit={@submit_action}>
+  <.form :let={f} for={@form} phx-submit={@submit_action} phx-change="validate">
     <.input type="text" field={f[:name]} placeholder="input title" />
 
     <.input type="text" field={f[:email]} placeholder="email" />
 
-    <.inputs_for :let={pet_form} field={f[:pets]}>
-      <%= pet_form.index %>
-      <%= pet_form.name %>
-      <.input type="text" field={pet_form[:name]} placeholder="input title" />
-      <.link phx-click={JS.push("delete_pet")} phx-value-path={pet_form.name}>
-        Delete
-      </.link>
-    </.inputs_for>
+    <div :if={@live_action == :edit} class="mt-10">
+      <.header>
+        Listing Pets
+        <:actions>
+          <.button class="btn-outline" type="button" phx-click={JS.push("add_pet")}>
+            Add Pet
+          </.button>
+        </:actions>
+      </.header>
 
-    <.button class="mt-2" type="submit"><%= @submit_action %></.button>
+      <.inputs_for :let={pet_form} field={f[:pets]}>
+        <div class="flex flex-row space-x-4">
+          <.input type="text" field={pet_form[:name]} placeholder="pet name" />
+          <.input type="text" field={pet_form[:date_of_birth]} placeholder="date of birth" />
+          <.input type="text" field={pet_form[:type]} placeholder="type" />
+
+          <.link phx-click={JS.push("delete_pet")} phx-value-path={pet_form.name}>
+            <.icon name="hero-trash-solid" class="h-5 w-5 mt-4" />
+          </.link>
+        </div>
+      </.inputs_for>
+    </div>
+
+    <.button class="mt-12" type="submit"><%= @submit_action %></.button>
   </.form>
-
-  <.link phx-click={JS.push("add_pet")}>
-    Add Pet
-  </.link>
 </.modal>

@@ -22,7 +22,7 @@ defmodule PhoenixVetWeb.OwnerLive do
     socket
     |> assign(:page_title, "New Owner")
     |> assign(:submit_action, :save)
-    |> assign(form: AshPhoenix.Form.for_create(Owner, :create) |> to_form())
+    |> assign(form: AshPhoenix.Form.for_create(Owner, :create, forms: [auto?: true]) |> to_form())
   end
 
   defp apply_action(socket, :edit, %{"id" => id}) do
@@ -43,6 +43,14 @@ defmodule PhoenixVetWeb.OwnerLive do
       _ ->
         redirect(socket, to: ~p"/owners")
     end
+  end
+
+  def handle_event("validate", %{"form" => params}, socket) do
+    form = socket.assigns.form |> AshPhoenix.Form.validate(params, errors: false)
+
+    {:noreply, assign(socket, form: form)}
+
+    # {:noreply, socket}
   end
 
   def handle_event("save", %{"form" => params}, socket) do
@@ -69,6 +77,6 @@ defmodule PhoenixVetWeb.OwnerLive do
   def handle_event("delete_pet", %{"path" => path}, socket) do
     form = AshPhoenix.Form.remove_form(socket.assigns.form, path)
 
-    {:reply, %{}, assign(socket, form: form)}
+    {:noreply, assign(socket, form: form)}
   end
 end
