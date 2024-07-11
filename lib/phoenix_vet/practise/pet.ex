@@ -19,7 +19,7 @@ defmodule PhoenixVet.Practise.Pet do
     attribute :name, :string
 
     attribute :type, :atom do
-      constraints one_of: [:dog, :cat, :hamster]
+      constraints one_of: [:dog, :cat, :mouse]
     end
 
     create_timestamp :inserted_at
@@ -28,7 +28,7 @@ defmodule PhoenixVet.Practise.Pet do
 
   actions do
     create :create do
-      accept [:name]
+      accept [:name, :date_of_birth, :type]
       primary? true
     end
 
@@ -37,7 +37,8 @@ defmodule PhoenixVet.Practise.Pet do
     end
 
     update :update do
-      accept [:name]
+      accept [:name, :date_of_birth, :type]
+
       validate string_length(:name, min: 3)
       primary? true
       require_atomic? false
