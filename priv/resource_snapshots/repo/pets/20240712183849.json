@@ -13,8 +13,8 @@
     {
       "default": "nil",
       "size": null,
-      "type": "text",
-      "source": "email",
+      "type": "date",
+      "source": "date_of_birth",
       "references": null,
       "allow_nil?": true,
       "primary_key?": false,
@@ -34,7 +34,7 @@
       "default": "nil",
       "size": null,
       "type": "text",
-      "source": "phone",
+      "source": "type",
       "references": null,
       "allow_nil?": true,
       "primary_key?": false,
@@ -59,10 +59,39 @@
       "allow_nil?": false,
       "primary_key?": false,
       "generated?": false
+    },
+    {
+      "default": "nil",
+      "size": null,
+      "type": "bigint",
+      "source": "owner_id",
+      "references": {
+        "name": "pets_owner_id_fkey",
+        "table": "owners",
+        "schema": "public",
+        "destination_attribute": "id",
+        "primary_key?": true,
+        "multitenancy": {
+          "global": null,
+          "attribute": null,
+          "strategy": null
+        },
+        "on_delete": "delete",
+        "on_update": null,
+        "deferrable": false,
+        "match_with": null,
+        "match_type": null,
+        "index?": false,
+        "destination_attribute_default": null,
+        "destination_attribute_generated": null
+      },
+      "allow_nil?": false,
+      "primary_key?": false,
+      "generated?": false
     }
   ],
-  "table": "owners",
-  "hash": "AE11BCA7D1A4758966A52DB0D5D7B8A23F52D48D2EDE70AB80C77DD718DCFA61",
+  "table": "pets",
+  "hash": "60227D815A2D6C3B16EC3DCADA4B8930562FB8AA2AC2292539D45F3497798DBE",
   "repo": "Elixir.PhoenixVet.Repo",
   "check_constraints": [],
   "custom_indexes": [],

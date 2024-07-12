@@ -42,7 +42,7 @@ defmodule PhoenixVet.Repo.Migrations.InitialMigrations do
 
     alter table(:owners) do
       add :email, :text
-      add :name, :text
+      add :name, :text, null: false
       add :phone, :text
 
       add :inserted_at, :utc_datetime_usec,

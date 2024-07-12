@@ -39,7 +39,6 @@ defmodule PhoenixVet.Practise.Pet do
     update :update do
       accept [:name, :date_of_birth, :type]
 
-      validate string_length(:name, min: 3)
       primary? true
       require_atomic? false
     end
@@ -58,5 +57,11 @@ defmodule PhoenixVet.Practise.Pet do
       attribute_type :integer
       allow_nil? false
     end
+  end
+
+  validations do
+    validate string_length(:name, min: 3)
+    validate present(:date_of_birth)
+    validate present(:type)
   end
 end

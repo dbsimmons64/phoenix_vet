@@ -1,4 +1,4 @@
-defmodule PhoenixVet.Repo.Migrations.Install3Extensions20240704144855 do
+defmodule PhoenixVet.Repo.Migrations.Install3Extensions20240712183846 do
   @moduledoc """
   Installs any extensions that are mentioned in the repo's `installed_extensions/0` callback
 

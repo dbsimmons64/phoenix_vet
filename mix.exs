@@ -60,7 +60,7 @@ defmodule PhoenixVet.MixProject do
       {:jason, "~> 1.2"},
       {:dns_cluster, "~> 0.1.1"},
       {:bandit, "~> 1.5"},
-      {:ash, "~> 3.0"},
+      {:ash, "~> 3.1"},
       {:picosat_elixir, "~> 0.2.3"},
       {:ash_postgres, "~> 2.0"},
       {:ash_phoenix, "~> 2.0"}
