@@ -16,40 +16,7 @@
       <div class="flex-1">Vets</div>
       <div class="flex-none">
         <ul class="menu menu-horizontal px-1">
-          <%= if @current_user do %>
-            <li><a href={~p"/overview"}>Overview</a></li>
-            <li><a href={~p"/accounts"}>Accounts</a></li>
-            <li><a href={~p"/categories"}>Categories</a></li>
-            <li>
-              <details>
-                <summary>
-                  <%= @current_user.email %>
-                </summary>
-                <ul class="p-2 bg-base-100 rounded-t-none w-full">
-                  <li><a href={~p"/users/settings"}>Settings</a></li>
-                  <li>
-                    <.link href={~p"/users/log_out"} method="delete">
-                      Log out
-                    </.link>
-                  </li>
-                </ul>
-              </details>
-            </li>
-          <% else %>
-            <li>
-              <a href={~p"/users/register"}>
-                Register
-              </a>
-            </li>
-            <li>
-              <a
-                href={~p"/users/log_in"}
-                class="text-[0.8125rem] leading-6 text-zinc-900 font-semibold hover:text-zinc-700"
-              >
-                Log in
-              </a>
-            </li>
-          <% end %>
+          <li><a href={~p"/owners"}>Owners</a></li>
         </ul>
       </div>
     </div>
