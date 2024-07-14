@@ -1,6 +1,8 @@
 defmodule PhoenixVetWeb.Router do
   use PhoenixVetWeb, :router
 
+  use AshAuthentication.Phoenix.Router
+
   pipeline :browser do
     plug :accepts, ["html"]
     plug :fetch_session
@@ -8,6 +10,7 @@ defmodule PhoenixVetWeb.Router do
     plug :put_root_layout, html: {PhoenixVetWeb.Layouts, :root}
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+    plug :load_from_session
   end
 
   pipeline :api do
@@ -18,9 +21,18 @@ defmodule PhoenixVetWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :home
-    live "/owners", OwnerLive, :index
-    live "/owners/new", OwnerLive, :new
-    live "/owners/:id/edit", OwnerLive, :edit
+
+    sign_in_route(register_path: "/register", reset_path: "/reset")
+    sign_out_route AuthController
+    auth_routes_for PhoenixVet.Accounts.User, to: AuthController
+    reset_route []
+
+    ash_authentication_live_session :authentication_required,
+      on_mount: {PhoenixVetWeb.LiveUserAuth, :live_user_required} do
+      live "/owners", OwnerLive, :index
+      live "/owners/new", OwnerLive, :new
+      live "/owners/:id/edit", OwnerLive, :edit
+    end
   end
 
   # Other scopes may use custom stacks.

@@ -9,7 +9,9 @@ module.exports = {
   content: [
     "./js/**/*.js",
     "../lib/phoenix_vet_web.ex",
-    "../lib/phoenix_vet_web/**/*.*ex"
+    "../lib/phoenix_vet_web/**/*.*ex",
+    "../deps/ash_authentication_phoenix/**/*.*ex",
+
   ],
   theme: {
     extend: {

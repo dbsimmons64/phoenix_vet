@@ -32,7 +32,9 @@ config :phoenix_vet, PhoenixVetWeb.Endpoint,
 config :phoenix_vet, PhoenixVet.Mailer, adapter: Swoosh.Adapters.Local
 
 config :phoenix_vet,
-  ash_domains: [PhoenixVet.Practise]
+  ash_domains: [PhoenixVet.Practise, PhoenixVet.Accounts]
+
+config :phoenix_vet, :secret_key_base, "some_super_secret_random_value"
 
 # Configure esbuild (the version is required)
 config :esbuild,

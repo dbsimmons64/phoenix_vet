@@ -12,6 +12,7 @@ defmodule PhoenixVet.Application do
       PhoenixVet.Repo,
       {DNSCluster, query: Application.get_env(:phoenix_vet, :dns_cluster_query) || :ignore},
       {Phoenix.PubSub, name: PhoenixVet.PubSub},
+      {AshAuthentication.Supervisor, otp_app: :phoenix_vet},
       # Start the Finch HTTP client for sending emails
       {Finch, name: PhoenixVet.Finch},
       # Start a worker by calling: PhoenixVet.Worker.start_link(arg)
