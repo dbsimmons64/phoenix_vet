@@ -2,10 +2,14 @@
   Listing Owners
   <:actions>
     <.link patch={~p"/owners/new"}>
-      <.button>New Owner</.button>
+      <.button>
+        New Owner
+      </.button>
     </.link>
   </:actions>
 </.header>
+
+<button phx-disable-with="Signing in ..." type="submit">Sign in</button>
 
 <.table id="owners" rows={@streams.owners}>
   <:col :let={{_id, owner}} label="Name"><%= owner.name %></:col>
@@ -29,7 +33,7 @@
   show
   on_cancel={JS.patch(~p"/owners")}
 >
-  <h2 class="mt-8 text-lg"><%= @live_action %> owner</h2>
+  <h2 class="mt-4 mb-8 text-lg"><%= @page_title %></h2>
   <.form :let={f} for={@form} phx-submit={@submit_action} phx-change="validate">
     <.input type="text" field={f[:name]} placeholder="input title" />
 
@@ -39,7 +43,7 @@
       <.header>
         Listing Pets
         <:actions>
-          <.button class="btn-outline" type="button" phx-click={JS.push("add_pet")}>
+          <.button type="button" phx-click={JS.push("add_pet")}>
             Add Pet
           </.button>
         </:actions>
@@ -61,7 +65,7 @@
           />
 
           <.link phx-click={JS.push("delete_pet")} phx-value-path={pet_form.name}>
-            <.icon name="hero-trash-solid" class="h-5 w-5 mt-4" />
+            <.icon name="hero-trash-solid" class="h-5 w-5 mt-4 bg-red-500" />
           </.link>
         </div>
       </.inputs_for>

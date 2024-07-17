@@ -22,7 +22,12 @@ defmodule PhoenixVetWeb.Router do
 
     get "/", PageController, :home
 
-    sign_in_route(register_path: "/register", reset_path: "/reset")
+    sign_in_route(
+      register_path: "/register",
+      reset_path: "/reset",
+      overrides: [PhoenixVetWeb.AuthOverides, AshAuthentication.Phoenix.Overrides.Default]
+    )
+
     sign_out_route AuthController
     auth_routes_for PhoenixVet.Accounts.User, to: AuthController
     reset_route []
